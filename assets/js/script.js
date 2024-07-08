@@ -52,6 +52,13 @@ function deleteTask(taskId) {
 //genera una nueva id basada en el largo del array.
 let newId = taskList[taskList.length - 1].id;
 
+function changeStatus(taskId) {
+  const task = taskList.find((task) => task.id === taskId);
+  task.complete = task.complete ? false : true;
+  taskRender(taskList, taskContainer);
+  completeTask.innerText = taskList.filter((task) => task.complete).length;
+}
+
 addTaskBtn.addEventListener("click", () => {
   const newTask = {
     id: (newId += 1),
@@ -64,13 +71,6 @@ addTaskBtn.addEventListener("click", () => {
   console.table(taskList);
   console.log(taskList.length);
 });
-
-function changeStatus(taskId) {
-  const task = taskList.find((task) => task.id === taskId);
-  task.complete = task.complete ? false : true;
-  taskRender(taskList, taskContainer);
-  completeTask.innerText = taskList.filter((task) => task.complete).length;
-}
 
 // Renderizar las tareas inicialmente al cargar la página
 taskRender(taskList, taskContainer);
